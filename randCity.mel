@@ -1,8 +1,8 @@
-proc building()
+proc building(float $scalexMin, float $scalexMax, float $scaleyMin, float $scaleyMax, float $scalezMin, float $scalezMax, float $movexMin, float $movexMax, float $movezMin, float $movezMax, int $randMin, int $randMax)
 {
     string $objects[];
     
-    float $scalexMin = 1;
+    /*float $scalexMin = 1;
     float $scalexMax = 4;
     float $scaleyMin = 1;
     float $scaleyMax = 10;
@@ -13,14 +13,21 @@ proc building()
     float $movezMin = -11;
     float $movezMax = 11;
     
+    int $randMin = 20;
+    int $randMax = 100; */
+    
+    int $randNum = rand ($randMin,$randMax);
+    
+    for ($i = 0; $i<$randNum; $i++)
+    {    
+    
     float $sx = rand ($scalexMin,$scalexMax);
     float $sy = rand ($scaleyMin,$scaleyMax);
     float $sz = rand ($scalezMin,$scalezMax);
     float $mx = rand ($movexMin,$movexMax);
     float $my = $sy/2;
     float $mz = rand ($movezMin,$movezMax);
-    
-    //polyCube -w 1 -h 1 -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1 -name "Building";
+     
     string $sels[] = `ls -selection`;
     $objects[0] = $sels[0];
     
@@ -28,22 +35,12 @@ proc building()
     
     scale -r $sx $sy $sz $objects[0];
     move -r $mx $my $mz $objects[0];
-       
-}
 
-global proc city()
-{
-   int $randMin = 20;
-   int $randMax = 100; 
-   int $randNum = rand ($randMin,$randMax);
-   
-   for ($i = 0; $i<$randNum; $i++)
-   {
-       building();
+       
    } 
    
    print ("There are now " + $randNum + " objects!");
     
 }
 
-city();
+building(1, 4, 1, 10, 1, 4, -11, 11, -11, 11, 20, 70);
