@@ -1,0 +1,28 @@
+global proc toolbox()
+{
+    if (`window -exists ToolboxWindow`)
+	deleteUI ToolboxWindow;
+	
+    window -title "Maya Toolbox" ToolboxWindow;
+    columnLayout -adj true ToolboxColumn ;	
+    
+    button
+    -label "CTRL Maker"
+    -command "createFKControls"
+    ctrlButton;
+    
+    button
+    -label "Rand duplication"
+    -command "rand_Window"
+    randButton;
+    
+    button
+    -label "Renamer"
+    -command "Renamer"
+    renamerButton;
+    	
+        
+    showWindow ToolboxWindow;
+    window -edit -wh 310 110 ToolboxWindow;  
+}
+toolbox;
