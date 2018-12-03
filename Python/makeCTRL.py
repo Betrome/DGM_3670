@@ -27,47 +27,43 @@ def makeCTRL():
 	
 	if (controlSuff == ""):
 	    cmds.error ("Please enter a suffix.")
-
-#To Here
 	    
-    for ($i=0; $i<$size; $i++)
-	    string $object1[];
-	    string $objectShape1[];	  
+    for i in size:
+	    object1 = []
+	    objectShape1 = []	  
 
 		#creates Circle controls
-		if ($ctrlShape == 0)
-		{
-		    $object1 = `circle -nr 1 0 0 -ch 0`;
-		    $objectShape1 = `pickWalk -d down`;
+		if (ctrlShape == 0):
+		    object1 = cmds.circle (nr = (1,0,0), ch = False)
+		    objectShape1 = cmds.pickWalk (direction = 'down')
 		    
-		    setAttr ($objectShape1[0] + ".overrideEnabled") 1;
+		    cmds.setAttr (objectShape1[0] + ".overrideEnabled", 1)
 		
-		    setAttr ($objectShape1[0] + ".overrideColor") $color ;		    
-		}
+		    cmds.setAttr (objectShape1[0] + ".overrideColor", clr)		    
 		
-		//creates Square controls
-		else if ($ctrlShape == 1)
-		{		    
-		    $object1 = `nurbsSquare -c 0 0 0 -nr 0 1 0 -sl1 2 -sl2 2 -sps 1 -d 3 -ch 1`;
-		    $objectShape1 = `pickWalk -d down`;
-		    $objectShape2 = `pickWalk -d right`;
-		    $objectShape3 = `pickWalk -d right`;
-		    $objectShape4 = `pickWalk -d right`;
+		
+		
+		#creates Square controls
+		elif (ctrlShape == 1):		    
+		    object1 = cmds.nurbsSquare (c = (0, 0, 0), nr = (0, 1, 0), sl1 = 2, sl2 = 2, sps =  1, d = 3, ch = 1)
+		    objectShape1 = cmds.pickWalk (d = 'down')
+		    objectShape2 = cmds.pickWalk (d = 'right')
+		    objectShape3 = cmds.pickWalk (d = 'right')
+		    objectShape4 = cmds.pickWalk (d = 'right')
 		    
-		    setAttr ($objectShape1[0] + ".overrideEnabled") 1;
-		    setAttr ($objectShape2[0] + ".overrideEnabled") 1;
-		    setAttr ($objectShape3[0] + ".overrideEnabled") 1;
-		    setAttr ($objectShape4[0] + ".overrideEnabled") 1;
+		    cmds.setAttr (objectShape1[0] + ".overrideEnabled", 1)
+		    cmds.setAttr (objectShape2[0] + ".overrideEnabled", 1)
+		    cmds.setAttr (objectShape3[0] + ".overrideEnabled", 1)
+		    cmds.setAttr (objectShape4[0] + ".overrideEnabled", 1)
 		
-		    setAttr ($objectShape1[0] + ".overrideColor") $color ;
-		    setAttr ($objectShape2[0] + ".overrideColor") $color ;
-		    setAttr ($objectShape3[0] + ".overrideColor") $color ;
-		    setAttr ($objectShape4[0] + ".overrideColor") $color ;
+		    cmds.setAttr (objectShape1[0] + ".overrideColor", clr)
+		    cmds.setAttr (objectShape2[0] + ".overrideColor", clr)
+		    cmds.setAttr (objectShape3[0] + ".overrideColor", clr)
+		    cmds.setAttr (objectShape4[0] + ".overrideColor", clr)
 		    
-		    		    		 
-		}
+		 #To Here   		    		 
 		
-		//creates Sphere controls
+		#creates Sphere controls
 		else if ($ctrlShape == 2)
 		{		    
 		    $object1 =`circle -nr 1 0 0 -ch 0`;
