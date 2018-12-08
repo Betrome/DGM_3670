@@ -159,7 +159,7 @@ global proc createFKControls()
 
 	$sel = `ls -sl`;	
     	if (`size ($sel)` >= 1)
-    	
+    	{
     	$text = $sel[0];
     
     	window -title "Create FK Controllers" makeFKWindow;
@@ -225,7 +225,7 @@ global proc createFKControls()
     	
     	if (`size($sel)` >= 1)
         textFieldGrp -e -text "_CTRL" -editable true controlName;
-	
+	}
 }
 createFKControls;
 
