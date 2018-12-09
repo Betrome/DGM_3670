@@ -24,15 +24,17 @@ def create(option):
             locator = cmds.spaceLocator()[0]
             cmds.xform(locator, translation=pivot, worldSpace=True)
 
-
-if cmds.window('Locator Creator', exists=True):
-    cmds.deleteUI('Locator Creator')
-
-win = cmds.window(title = 'Locator Creator', wh = (300, 50))
-mCol = cmds.columnLayout(adjustableColumn=True)
-drop = cmds.optionMenu(label='Type')
-cmds.menuItem(parent=drop, label='Bounding Box')
-cmds.menuItem(parent=drop, label='Pivot Point')
-cmds.button(label='Create Locator', c=lambda x: create(cmds.optionMenu(drop, q=True, select=True)))
-
-cmds.showWindow(win)
+def locWindow():
+    if cmds.window('Locator Creator', exists=True):
+        cmds.deleteUI('Locator Creator')
+    
+    win = cmds.window(title = 'Locator Creator', wh = (300, 50))
+    mCol = cmds.columnLayout(adjustableColumn=True)
+    drop = cmds.optionMenu(label='Type')
+    cmds.menuItem(parent=drop, label='Bounding Box')
+    cmds.menuItem(parent=drop, label='Pivot Point')
+    cmds.button(label='Create Locator', c=lambda x: create(cmds.optionMenu(drop, q=True, select=True)))
+    
+    cmds.showWindow(win)
+    
+locWindow()

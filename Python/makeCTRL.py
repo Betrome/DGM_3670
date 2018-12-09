@@ -1,5 +1,6 @@
 import pymel.core as cmds
 
+
 def makeCTRL(*args):
     
     selection = cmds.ls (selection = True)
@@ -9,14 +10,14 @@ def makeCTRL(*args):
     if (size == 0):
         cmds.error ("Please select one or more objects.")
         
-    ctrlSize = cmds.floatSliderGrp (controlSize, q = 1, value = 1.0)
+    ctrlSize = cmds.floatSliderGrp ('controlSize', q = 1, value = 1.0)
     
-    clr = cmds.colorIndexSliderGrp (controlColor, q = 1, value = 1)
+    clr = cmds.colorIndexSliderGrp ('controlColor', q = 1, value = 1)
     clr -= 1
 	
-    controlSuff = cmds.textFieldGrp (controlName, q = 1, text = 1)
+    controlSuff = cmds.textFieldGrp ('controlName', q = 1, text = 1)
     
-    shape = cmds.intSliderGrp (ctrlShape, q = 1, value = 1)
+    shape = cmds.intSliderGrp ('ctrlShape', q = 1, value = 1)
 
 
     if controlSuff == "":
@@ -108,39 +109,43 @@ def makeCTRL(*args):
         i += 1
 
 
-
-if cmds.window ('Create_FK_Controllers', ex = True):
-    cmds.deleteUI ('Create_FK_Controllers')
-
-text = ""
-sel = cmds.ls (sl = True)
-
-size = 0
-for x in sel:
-    size = x
+def createFKControls():
+    if cmds.window ('Create_FK_Controllers', ex = True):
+        cmds.deleteUI ('Create_FK_Controllers')
     
-if size >= 1:
-    text = sel[0]
+    text = ""
+    sel = cmds.ls (sl = True)
     
-window = cmds.window (title = "Create_FK_Controllers", iconName = "Ctrl maker", wh = (310, 110))
-
-cmds.columnLayout (adj = True)
-
-controlSize = cmds.floatSliderGrp (label = "Control Size", field = True, cw3 = (80, 40, 150), minValue = 0.01, maxValue = 50.0, fieldMinValue = 0.1, fieldMaxValue = 50, value = 2)
-
-controlColor = cmds.colorIndexSliderGrp (label = "Control Color", cw3 = (80, 40, 150), min = 0, max = 31, value = 5)
-
-ctrlShape = cmds.intSliderGrp (label = "Control Shape", field = True, cw3 = (80, 40, 80), minValue = 0, maxValue = 2, fieldMinValue = 0, fieldMaxValue = 2, value = 0)
-
-controlName = cmds.textFieldGrp (label = "Control Suffix", text = "_CTRL", cw2 = (80, 200))
-
-createFKButton = cmds.button (label = "EXECUTE", command = makeCTRL)
-
-originalSelection = cmds.ls (sl = True)
-
-cmds.select (originalSelection, r = True)
-
-cmds.showWindow (window)
-
-controlName = cmds.textFieldGrp (text = "_CTRL", editable = True)
-
+    size = 0
+    for x in sel:
+        size = x
+        
+    if size >= 1:
+        text = sel[0]
+        
+    window = cmds.window (title = "Create_FK_Controllers", iconName = "Ctrl maker", wh = (310, 110))
+    
+    cmds.columnLayout (adj = True)
+    
+    cmds.floatSliderGrp ('controlSize', label = "Control Size", field = True, cw3 = (80, 40, 150), minValue = 0.01, maxValue = 50.0, fieldMinValue = 0.1, fieldMaxValue = 50, value = 2)
+    
+    cmds.colorIndexSliderGrp ('controlColor',label = "Control Color", cw3 = (80, 40, 150), min = 0, max = 31, value = 5)
+    
+    cmds.intSliderGrp ('ctrlShape', label = "Control Shape", field = True, cw3 = (80, 40, 80), minValue = 0, maxValue = 2, fieldMinValue = 0, fieldMaxValue = 2, value = 0)
+    
+    cmds.textFieldGrp ('controlName', label = "Control Suffix", text = "_CTRL", cw2 = (80, 200))
+    
+    cz = cmds.floatSliderGrp ('controlSize', q = 1, value = 1.0)
+    
+    createFKButton = cmds.button (label = "EXECUTE", command = makeCTRL)
+    
+    originalSelection = cmds.ls (sl = True)
+    
+    cmds.select (originalSelection, r = True)
+    
+    cmds.showWindow (window)
+    
+    controlName = cmds.textFieldGrp (text = "_CTRL", editable = True)
+    
+    
+createFKControls()
