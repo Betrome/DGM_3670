@@ -1,7 +1,7 @@
 import pymel.core as cmds
 
 
-def makeCTRL(*args):
+def makeCTRL(ctrlSize, clr, controlSuff, shape):
     
     selection = cmds.ls (selection = True)
     
@@ -9,16 +9,6 @@ def makeCTRL(*args):
     
     if (size == 0):
         cmds.error ("Please select one or more objects.")
-        
-    ctrlSize = cmds.floatSliderGrp ('controlSize', q = 1, value = 1.0)
-    
-    clr = cmds.colorIndexSliderGrp ('controlColor', q = 1, value = 1)
-    clr -= 1
-	
-    controlSuff = cmds.textFieldGrp ('controlName', q = 1, text = 1)
-    
-    shape = cmds.intSliderGrp ('ctrlShape', q = 1, value = 1)
-
 
     if controlSuff == "":
         cmds.error ("Please enter a suffix.")
@@ -137,7 +127,16 @@ def createFKControls():
     
     cz = cmds.floatSliderGrp ('controlSize', q = 1, value = 1.0)
     
-    createFKButton = cmds.button (label = "EXECUTE", command = makeCTRL)
+    cs = cmds.floatSliderGrp ('controlSize', q = 1, value = 1.0)
+    
+    cr = cmds.colorIndexSliderGrp ('controlColor', q = 1, value = 1)
+    cr -= 1
+	
+    cn = cmds.textFieldGrp ('controlName', q = 1, text = 1)
+    
+    sh = cmds.intSliderGrp ('ctrlShape', q = 1, value = 1)
+    
+    createFKButton = cmds.button (label = "EXECUTE", command = lambda x: makeCTRL(cs, cr, cn, sh))
     
     originalSelection = cmds.ls (sl = True)
     
